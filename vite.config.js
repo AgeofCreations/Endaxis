@@ -11,11 +11,14 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
-  base: '/',
+  base: '/Endaxis/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  test: {}
+  test: {},
+  build: {
+    outDir: 'docs'
+  }
 })
