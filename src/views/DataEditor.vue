@@ -1351,7 +1351,7 @@ function onVariantTypeChange(variant, variantIdx) {
   if (variant.name === '新强化技能' || variant.name.startsWith('强化')) {
     const typeObj = VARIANT_TYPES.find(t => t.value === variant.type)
     if (typeObj) {
-      const labelName = typeObj.label
+      const labelName = typeObj.value
       variant.name = `强化${labelName}`
     }
   }
@@ -2109,13 +2109,13 @@ function saveData() {
               <div class="form-group">
                 <label>元素属性</label>
                 <el-select v-model="selectedChar.element" size="large" style="width: 100%">
-                  <el-option v-for="elm in ELEMENTS" :key="elm.value" :label="elm.label" :value="elm.value" />
+                  <el-option v-for="elm in ELEMENTS" :key="elm.value" :label="elm.value" :value="elm.value" />
                 </el-select>
               </div>
               <div class="form-group">
                 <label>武器类型</label>
                 <el-select v-model="selectedChar.weapon" size="large" style="width: 100%">
-                  <el-option v-for="wpn in WEAPON_TYPES" :key="wpn.value" :label="wpn.label" :value="wpn.value" />
+                  <el-option v-for="wpn in WEAPON_TYPES" :key="wpn.value" :label="wpn.value" :value="wpn.value" />
                 </el-select>
               </div>
               <div class="form-group full-width"><label>图标路径</label><input v-model="selectedChar.avatar" type="text" /></div>
@@ -2169,7 +2169,7 @@ function saveData() {
                 <div class="form-group">
                   <label>动作类型 (切换重置)</label>
                   <el-select v-model="variant.type" size="large" style="width: 100%" @change="onVariantTypeChange(variant, idx)">
-                    <el-option v-for="t in VARIANT_TYPES" :key="t.value" :label="t.label" :value="t.value" />
+                    <el-option v-for="t in VARIANT_TYPES" :key="t.value" :label="t.value" :value="t.value" />
                   </el-select>
                 </div>
                 <div class="form-group">
@@ -2237,7 +2237,7 @@ function saveData() {
                         placeholder="选择要绑定的状态"
                         :disabled="getVariantBindingOptions(variant, idx).length === 0"
                     >
-                      <el-option v-for="opt in getVariantBindingOptions(variant, idx)" :key="opt.value" :label="opt.label" :value="opt.value">
+                      <el-option v-for="opt in getVariantBindingOptions(variant, idx)" :key="opt.value" :label="opt.value" :value="opt.value">
                         <div class="binding-option">
                           <img :src="getEffectIconPath(opt.type)" class="binding-option__icon" />
                           <span class="binding-option__label">{{ opt.label }}</span>
@@ -2283,7 +2283,7 @@ function saveData() {
                         <button class="ea-btn ea-btn--icon ea-btn--icon-24 ea-btn--glass-rect ea-btn--accent-red ea-btn--glass-rect-danger" @click="removeVariantEffect(variant, idx, rIndex, cIndex)">×</button>
                       </div>
                       <el-select v-model="item.type" size="small" class="card-select full-width-mb" style="width: 100%">
-                        <el-option v-for="opt in getVariantAvailableOptions(variant, idx)" :key="opt.value" :label="opt.label" :value="opt.value" />
+                        <el-option v-for="opt in getVariantAvailableOptions(variant, idx)" :key="opt.value" :label="opt.value" :value="opt.value" />
                       </el-select>
 
                       <div class="card-props-grid">
@@ -2352,7 +2352,7 @@ function saveData() {
                   <label>技能属性</label>
                   <el-select v-model="selectedChar[`${type}_element`]" size="large" placeholder="默认 (跟随干员)" style="width: 100%">
                     <el-option value="" label="默认 (跟随干员)" />
-                    <el-option v-for="elm in ELEMENTS" :key="elm.value" :label="elm.label" :value="elm.value" />
+                    <el-option v-for="elm in ELEMENTS" :key="elm.value" :label="elm.value" :value="elm.value" />
                   </el-select>
                 </div>
 
@@ -2405,7 +2405,7 @@ function saveData() {
                         placeholder="选择要绑定的状态"
                         :disabled="getBindingOptions(type).length === 0"
                     >
-                      <el-option v-for="opt in getBindingOptions(type)" :key="opt.value" :label="opt.label" :value="opt.value">
+                      <el-option v-for="opt in getBindingOptions(type)" :key="opt.value" :label="opt.value" :value="opt.value">
                         <div class="binding-option">
                           <img :src="getEffectIconPath(opt.type)" class="binding-option__icon" />
                           <span class="binding-option__label">{{ opt.label }}</span>
@@ -2451,7 +2451,7 @@ function saveData() {
                         <button class="ea-btn ea-btn--icon ea-btn--icon-24 ea-btn--glass-rect ea-btn--accent-red ea-btn--glass-rect-danger" @click="removeAnomaly(selectedChar, type, rIndex, cIndex)">×</button>
                       </div>
                       <el-select v-model="item.type" size="small" class="card-select full-width-mb" style="width: 100%">
-                        <el-option v-for="opt in getAvailableAnomalyOptions(type)" :key="opt.value" :label="opt.label" :value="opt.value" />
+                        <el-option v-for="opt in getAvailableAnomalyOptions(type)" :key="opt.value" :label="opt.value" :value="opt.value" />
                       </el-select>
 
                       <div class="card-props-grid">
@@ -2519,7 +2519,7 @@ function saveData() {
                 style="width: 100%"
                 :style="{ '--ea-tier-color': ENEMY_TIERS.find(t=>t.value===selectedEnemy.tier)?.color }"
               >
-                <el-option v-for="t in ENEMY_TIERS" :key="t.value" :label="t.label" :value="t.value" />
+                <el-option v-for="t in ENEMY_TIERS" :key="t.value" :label="t.value" :value="t.value" />
               </el-select>
             </div>
 
@@ -2572,7 +2572,7 @@ function saveData() {
             <div class="form-group">
               <label>部位</label>
               <el-select v-model="selectedEquipment.slot" size="large" style="width: 100%">
-                <el-option v-for="s in EQUIPMENT_SLOTS" :key="s.value" :label="s.label" :value="s.value" />
+                <el-option v-for="s in EQUIPMENT_SLOTS" :key="s.value" :label="s.value" :value="s.value" />
               </el-select>
             </div>
             <div class="form-group">
@@ -2636,7 +2636,7 @@ function saveData() {
             <div class="matrix-cell">
               <el-select v-model="selectedEquipmentAffixes.primary1.modifierId" size="small" style="width: 100%" :teleported="true" placeholder="请选择">
                 <el-option :value="null" label="（无）" />
-                <el-option v-for="opt in primaryStatOptions" :key="`p1_${opt.value}`" :label="opt.label" :value="opt.value" />
+                <el-option v-for="opt in primaryStatOptions" :key="`p1_${opt.value}`" :label="opt.value" :value="opt.value" />
               </el-select>
             </div>
             <div v-for="col in equipmentAffixColumns" :key="`p1v_${col.index}`" class="matrix-cell">
@@ -2647,7 +2647,7 @@ function saveData() {
             <div class="matrix-cell">
               <el-select v-model="selectedEquipmentAffixes.primary2.modifierId" size="small" style="width: 100%" :teleported="true" placeholder="请选择">
                 <el-option :value="null" label="（无）" />
-                <el-option v-for="opt in primaryStatOptions" :key="`p2_${opt.value}`" :label="opt.label" :value="opt.value" />
+                <el-option v-for="opt in primaryStatOptions" :key="`p2_${opt.value}`" :label="opt.value" :value="opt.value" />
               </el-select>
             </div>
             <div v-for="col in equipmentAffixColumns" :key="`p2v_${col.index}`" class="matrix-cell">
@@ -2933,7 +2933,7 @@ function saveData() {
             <div class="form-group">
               <label>类型</label>
               <el-select v-model="selectedWeapon.type" size="large" style="width: 100%">
-                <el-option v-for="wpn in WEAPON_TYPES" :key="wpn.value" :label="wpn.label" :value="wpn.value" />
+                <el-option v-for="wpn in WEAPON_TYPES" :key="wpn.value" :label="wpn.value" :value="wpn.value" />
               </el-select>
             </div>
             <div class="form-group full-width"><label>图标路径</label><input v-model="selectedWeapon.icon" type="text" /></div>
@@ -2973,7 +2973,7 @@ function saveData() {
                     placeholder="请选择"
                 >
                   <el-option :value="null" label="（无）" />
-                  <el-option v-for="def in modifierDefs" :key="def.id" :label="def.label" :value="def.id" />
+                  <el-option v-for="def in modifierDefs" :key="def.id" :label="def.value" :value="def.id" />
                 </el-select>
               </div>
               <div class="form-group">
@@ -3002,7 +3002,7 @@ function saveData() {
                     placeholder="请选择"
                 >
                   <el-option :value="null" label="（无）" />
-                  <el-option v-for="def in modifierDefs" :key="def.id" :label="def.label" :value="def.id" />
+                  <el-option v-for="def in modifierDefs" :key="def.id" :label="def.value" :value="def.id" />
                 </el-select>
               </div>
               <div class="form-group">
@@ -3050,7 +3050,7 @@ function saveData() {
                           placeholder="请选择"
                       >
                         <el-option :value="null" label="（无）" />
-                        <el-option v-for="def in modifierDefs" :key="def.id" :label="def.label" :value="def.id" />
+                        <el-option v-for="def in modifierDefs" :key="def.id" :label="def.value" :value="def.id" />
                       </el-select>
                     </div>
                     <div class="form-group">
